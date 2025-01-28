@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mes Expériences</title>
+
+    <style>
+        /* Style global */
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #eef2f3;
+            color: #2c3e50;
+        }
+
+
+/* Style de la barre de navigation */
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #4CAF50; /* Couleur verte pour la barre entière */
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+}
+
+nav a {
+    float: left;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 20px;
+    text-decoration: none;
+}
+
+nav a:hover {
+    background-color: #45a049; /* Une nuance plus foncée de vert au survol */
+    color: white;
+}
+/*pour ne pas que la bar de navigation couvre les ecritures*/
+.offset {
+height: 60px; /* Même hauteur que la barre de navigation */
+}
+
+
+
+        /* Titre principal */
+        h1 {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 2.5rem;
+            color: #34495e;
+        }
+
+        /* Conteneur des expériences */
+        .experience-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Carte des expériences */
+        .experience-card {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+            padding: 20px;
+        }
+
+        /* Effet au survol */
+        .experience-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Style pour chaque expérience */
+        .experience-card h2 {
+            font-size: 1.5rem;
+            color: #2980b9;
+            margin-bottom: 10px;
+        }
+
+        .experience-card p {
+            margin: 5px 0;
+            font-size: 1rem;
+            color: #34495e;
+        }
+
+        .experience-card strong {
+            color: #2c3e50;
+        }
+
+        /* Message lorsqu'aucune expérience n'est ajoutée */
+        .no-experience {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #7f8c8d;
+            margin-top: 50px;
+        }
+
+        /* Style du bouton */
+        .add-button {
+            display: block;
+            margin: 40px auto;
+            padding: 12px 25px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .add-button:hover {
+            background-color: #2980b9;
+        }
+        a{
+            text-decoration: none;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .experience-card {
+                padding: 15px;
+            }
+
+            .add-button {
+                padding: 10px 20px;
+                font-size: 1rem;
+            }
+        }
+        a{
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Barre de navigation -->
+    <nav>
+        <a href="{% url 'trombinoscope' %}" class="active">Home</a>
+        <a href="{% url 'view_cvs' %}"> mes CVs</a>
+        <a href="{% url 'view_contact' %}"> Contacts</a>
+        <a href="{% url 'view_experiences' %}">
+             Expériences
+          </a>
+          <a href="{% url 'view_formations' %}">
+            Formations
+        </a>
+        <a href="{% url 'view_langues' %}">
+             Langues
+        </a>
+        <a href="{% url 'view_loisirs' %}">
+             Loisirs
+        </a>
+        <a href="{% url 'view_personne' %}">
+            Profil
+        </a>
+        <a href="{% url 'view_competences' %}">
+              Compétences
+        </a>
+    </nav>
+    <div class="offset"></div>
+
+
+
+    <h1>Mes Expériences Professionnelles</h1>
+
+    <a href="{% url 'create_experience' %}">
+        <button class="add-button" type="button">Ajouter une expérience</button>
+    </a>
+
+    <!-- Affichage des expériences -->
+    <div class="experience-container">
+        {% if experiences %}
+            {% for experience in experiences %}
+                <div class="experience-card">
+                    <h2>{{ experience.titre }}</h2>
+                    <p><strong>Date de début :</strong> {{ experience.date_debut }}</p>
+                    <p><strong>Date de fin :</strong> {% if experience.date_fin %}{{ experience.date_fin }}{% else %}En cours{% endif %}</p>
+                    <p><strong>Description :</strong> {{ experience.description }}</p>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p class="no-experience">Vous n'avez pas encore ajouté d'expériences professionnelles.</p>
+        {% endif %}
+    </div>
+
+    
+</body>
+</html>

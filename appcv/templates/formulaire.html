@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vérification du Mot de Passe</title>
+    <style>
+        /* Style de base */
+        body {
+            background-color: #f7fafc;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* Container principal */
+        .container {
+            background-color: white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+            transition: all 0.3s;
+        }
+
+        .container:hover {
+            transform: scale(1.05);
+        }
+
+        /* Titre principal */
+        h1 {
+            font-size: 2.25rem;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            color: #2b6cb0;
+        }
+
+        /* Formulaire */
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        /* Champs du formulaire */
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 15px;
+            border-radius: 9999px;
+            border: 1px solid #63b3ed;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            background-color: #ebf8ff;
+            color: #2b6cb0;
+            font-size: 1rem;
+        }
+
+        input[type="text"]:focus, input[type="password"]:focus {
+            outline: none;
+            border-color: #3182ce;
+            box-shadow: 0 0 0 4px rgba(50, 113, 192, 0.3);
+        }
+
+        /* Etiquettes des champs */
+        label {
+            font-weight: 600;
+            color: #2b6cb0;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Message d'erreur */
+        .error-message {
+            color: #f56565;
+            font-size: 0.875rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Bouton de soumission */
+        button[type="submit"] {
+            padding: 15px 25px;
+            border-radius: 9999px;
+            font-weight: 600;
+            text-align: center;
+            background-color: #3182ce;
+            color: white;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+            border: none;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #2b6cb0;
+        }
+
+        /* Message pour l'utilisateur authentifié */
+        .user-welcome {
+            text-align: center;
+            color: #2b6cb0;
+            font-weight: 600;
+            font-size: 1.25rem;
+            margin-top: 1.5rem;
+        }
+
+        /* Lien d'ajout ou modification des informations */
+        .user-action-link {
+            display: block;
+            text-align: center;
+            background-color: #ebf8ff;
+            color: #3182ce;
+            font-weight: 600;
+            padding: 15px 25px;
+            border-radius: 9999px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            margin-top: 1rem;
+            transition: background-color 0.3s;
+        }
+
+        .user-action-link:hover {
+            background-color: #bee3f8;
+        }
+
+        /* Lien pour la création de compte */
+        .create-account-link {
+            display: block;
+            text-align: center;
+            background-color: #ebf8ff;
+            color: #3182ce;
+            font-weight: 600;
+            padding: 15px 25px;
+            border-radius: 9999px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            margin-top: 1rem;
+            transition: background-color 0.3s;
+        }
+
+        .create-account-link:hover {
+            background-color: #bee3f8;
+        }
+
+        /* Message pour l'absence d'utilisateur */
+        .user-not-found {
+            text-align: center;
+            color: #f56565;
+            margin-top: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Vérification du Mot de Passe</h1>
+
+        <form method="POST">
+            {% csrf_token %}
+            
+            <!-- Champ pour le nom d'utilisateur -->
+            <div>
+                <label for="username">Nom d'utilisateur :</label>
+                <input type="text" name="username" id="username" required>
+            </div>
+
+            <!-- Champ pour le mot de passe -->
+            <div>
+                <label for="password">Mot de passe :</label>
+                <input type="password" name="password" id="password" required>
+            </div>
+
+            <!-- Bouton de soumission -->
+            <div class="flex justify-between items-center">
+                <button type="submit">
+                    Valider
+                </button>
+            </div>
+
+            <!-- Message d'erreur -->
+            {% if error_message %}
+                <p class="error-message">{{ error_message }}</p>
+            {% endif %}
+        </form>
+
+        <!-- Affichage si l'utilisateur est authentifié -->
+        {% if user_authenticated %}
+            <h2 class="user-welcome">Bienvenue, {{ user.username }} {{ personne.prenom }}</h2>
+            <a href="{% url 'boite' %}" class="user-action-link">
+                Ajouter ou modifier mes informations
+            </a>
+        {% endif %}
+
+        <!-- Message pour inviter l'utilisateur à créer un compte s'il n'en a pas -->
+        {% if user_not_found %}
+            <p class="user-not-found">Veuillez créer un compte si vous ne l'avez pas encore fait.</p>
+            <a href="{% url 'register' %}" class="create-account-link">
+                Créer un compte
+            </a>
+        {% endif %}
+    </div>
+
+</body>
+</html>

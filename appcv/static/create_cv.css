@@ -1,0 +1,151 @@
+/* Styles généraux pour la page de création de CV */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f7fc;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    text-align: center;
+    color: #1e3a8a;
+    margin-top: 20px;
+    font-size: 2rem;
+}
+
+/* Style de la barre de navigation */
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #4CAF50; /* Couleur verte pour la barre entière */
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+}
+
+nav a {
+    float: left;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 20px;
+    text-decoration: none;
+}
+
+nav a:hover {
+    background-color: #45a049; /* Une nuance plus foncée de vert au survol */
+    color: white;
+    text-decoration: none;
+}
+/*pour ne pas que la bar de navigation couvre les ecritures*/
+.offset {
+height: 60px; /* Même hauteur que la barre de navigation */
+}
+
+
+/* Formulaire */
+form {
+    max-width: 900px;
+    margin: 30px auto;
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Champs de formulaire */
+label {
+    font-size: 1rem;
+    color: #1e3a8a;
+    font-weight: bold;
+    margin-top: 15px;
+    display: block;
+}
+
+select, input[type="text"], input[type="date"], input[type="email"], textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 8px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    background-color: #f9fafb;
+    box-sizing: border-box;
+}
+
+input[type="file"] {
+    padding: 8px;
+    margin-top: 8px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+/* Boutons */
+button {
+    background-color: #1e3a8a;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 1rem;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #2563eb;
+}
+
+button[type="button"] {
+    background-color: #e0e7ff;
+    color: #1e3a8a;
+    border: 1px solid #ddd;
+}
+
+button[type="button"]:hover {
+    background-color: #d0d7fc;
+}
+
+/* Section des expériences, formations, etc. */
+#experiences, #formations, #competences, #langues, #loisirs {
+    margin-top: 15px;
+}
+
+label input[type="checkbox"] {
+    margin-right: 8px;
+}
+
+/* Liens */
+a {
+    color: #1e3a8a;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Section d'affichage des CVs */
+.Voircv {
+    background-color: #4ade80;
+    color: white;
+}
+
+.Voircv:hover {
+    background-color: #2c9e58;
+}
+
+/* Adaptation mobile */
+@media (max-width: 768px) {
+    form {
+        padding: 20px;
+    }
+
+    nav a {
+        font-size: 0.9rem;
+        padding: 8px 12px;
+    }
+}

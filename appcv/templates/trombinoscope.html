@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trombinoscope</title>
+    <style>
+        /* Style global */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 80px; /* Ajouter un espace sous le header fixe */
+        }
+   /* Style de la barre de navigation */
+   nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #4CAF50; /* Couleur verte pour la barre entière */
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+        }
+
+        nav a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+        }
+
+        nav a:hover {
+            background-color: #45a049; /* Une nuance plus foncée de vert au survol */
+            color: white;
+        }
+/*pour ne pas que la bar de navigation couvre les ecritures*/
+        .offset {
+    height: 60px; /* Même hauteur que la barre de navigation */
+}
+        /* Style du conteneur trombinoscope */
+        .trombinoscope-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            justify-content: space-around;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 20px;
+            margin: 20px auto;
+            max-width: 1200px;
+        }
+
+        .person-card {
+            text-align: center;
+            background-color: #fff;
+            padding: 5px;
+            width: 200px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+        }
+
+.contact-info {
+    text-align: left; /* Aligne le texte à gauche */
+    margin: 0; /* Évite des marges inutiles autour du bloc */
+    padding: 0; /* Évite un décalage visuel */
+    line-height: 1.5; /* Espace entre les lignes pour une meilleure lisibilité */
+}
+
+.contact-info span {
+    display: inline-block; /* Force chaque élément à respecter son espace */
+    width: 100%; /* Assure un alignement uniforme */
+    margin-bottom: 5px; /* Ajoute un espace entre les lignes */
+    text-align: center;
+}
+
+
+
+
+        .person-card:hover {
+            transform: scale(1.05);
+        }
+
+        .person-card img {
+            width: 95%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 10%;
+            margin-bottom: 5px;
+        }
+
+        .person-card a {
+            text-decoration: none;
+            color: #007BFF;
+        }
+    </style>
+</head>
+<body>
+    <!-- Barre de navigation -->
+    <nav>
+        <a href="{% url 'trombinoscope' %}" class="active">Home</a>
+        <a href="{% url 'register' %}">S'inscrire</a>
+        <a href="{% url 'formulaire' %}">Se connecter</a>
+    </nav>
+   <!-- quand la bar se posera sur les erciture je vais enlevé les commentaire-->
+   <!-- <div class="offset"></div>-->
+    <!-- Titre principal -->
+    <h1>Trombinoscope</h1>
+
+    <!-- Conteneur des cartes -->
+    <div class="trombinoscope-container">
+        {% for item in data %}
+        <div class="person-card">
+            <!-- Photo de la personne -->
+            {% if item.personne.photo and item.personne.photo.url %}
+                <a href="{% if item.premier_cv %}{% url 'template' item.premier_cv.id %}{% else %}#{% endif %}">
+                    <img src="{{ item.personne.photo.url }}" alt="">
+                </a>
+            {% else %}
+                <p>Aucune photo</p>
+            {% endif %}
+            <!-- Nom de la personne -->
+            <p class="contact-info">
+                <span><strong>Nom:</strong> {{ item.personne.nom }}</span> <br>
+                <span><strong>Prénom:</strong> {{ item.personne.prenom }}</span><br>
+                <span><strong>Tel:</strong> {{ item.contact.telephone|default:"Non disponible" }}</span><br>
+                <span><strong>Adresse:</strong> {{ item.contact.adresse|default:"Non disponible" }}</span>
+            </p>
+            <!-- Lien vers le CV -->
+            {% if item.premier_cv %}
+                <a href="{% url 'template' item.premier_cv.id %}">Voir le CV</a>
+            {% else %}
+                <p>Aucun CV disponible</p>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

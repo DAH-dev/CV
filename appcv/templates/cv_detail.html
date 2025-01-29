@@ -31,7 +31,7 @@
             width: 100px;
             height: 100px;
             object-fit: cover;
-            border-radius: 50%;
+            border-radius: 20%;
             margin-right: 20px;
             border: 3px solid #007BFF;
         }
@@ -108,9 +108,10 @@
                 <ul>
                     {% for experience in cv.experiences.all %}
                         <li>
-                            <strong>{{ experience.titre }}</strong> chez {{ experience.entreprise }}<br>
-                            <small>{{ experience.date_debut }} - {{ experience.date_fin|default:"Présent" }}</small><br>
-                            <p>{{ experience.description }}</p>
+                            <strong>Titre :</strong>{{ experience.titre }} <br>
+                          <strong>Entreprise :</strong> {{ experience.entreprise }}<br>
+                           <strong>Du</strong> <small>{{ experience.date_debut }} <strong>Au</strong> {{ experience.date_fin|default:"Présent" }}</small><br>
+                           <strong>Description: </strong> {{ experience.description }}
                         </li>
                     {% endfor %}
                 </ul>
@@ -126,9 +127,10 @@
                 <ul>
                     {% for formation in cv.formations.all %}
                         <li>
-                            <strong>{{ formation.diplome }}</strong> à {{ formation.etablissement }}<br>
-                            <small>{{ formation.date_debut }} - {{ formation.date_fin }}</small><br>
-                            <p>{{ formation.description }}</p>
+                            <strong> Diplôme: </strong>    {{ formation.diplome }} <br>
+                        <strong> Etablissement:</strong> {{ formation.institution }}<br>
+                    <strong>  Du </strong> <small>{{ formation.date_debut }}<strong> Au </strong>{{ formation.date_fin }}</small><br>
+                   <strong> Description </strong> {{ formation.description }}
                         </li>
                     {% endfor %}
                 </ul>
@@ -143,7 +145,7 @@
             {% if cv.competences.exists %}
                 <ul>
                     {% for competence in cv.competences.all %}
-                        <li>{{ competence.nom }} ({{ competence.niveau }})</li>
+                       <li>{{ competence.nom }} ({{ competence.niveau }})</li>
                     {% endfor %}
                 </ul>
             {% else %}

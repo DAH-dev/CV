@@ -477,8 +477,6 @@ def edit_cv(request, cv_id):
         "loisirs": loisirs,
     })
 
-
-
 def delete_cv(request, cv_id):
     cv = get_object_or_404(CV, id=cv_id)  # Récupérer le CV correspondant à l'ID
   
@@ -492,14 +490,15 @@ def send_cv_email(request, cv_id):
     cv = get_object_or_404(CV, id=cv_id, user=request.user)
     personne = cv.personne
 
+    # Récupération des données liées au CV
     loisirs = cv.loisirs.all() 
     experiences = cv.experiences.all() 
     langues = cv.langues.all() 
-    formations= cv.formations.all()
-    competences= cv.competences.all()
+    formations = cv.formations.all()
+    competences = cv.competences.all()
 
-    #photo_url = request.build_absolute_uri(personne.photo.url)
-    photo_url = "https://www.univ-na.ci/storage/settings/March2021/q7ebFVlLpG3BnHZWV47N.png"
+    # URL de la photo (si nécessaire)
+    photo_url = "{{ cv.personne.photo.url }}"
 
     if request.method == 'POST':
         recipient_email = request.POST.get('email')
@@ -510,30 +509,48 @@ def send_cv_email(request, cv_id):
 
         # Préparation de l'email
         subject = f"CV de {personne.nom} {personne.prenom}"
-        message = render_to_string('cv_email_template.html', context={
+        
+        # Sélection du template en fonction du design du CV
+        if cv.design == 'design1':
+            template_name = 'cv_design1.html'
+        elif cv.design == 'design2':
+            template_name = 'cv_design2.html'
+        elif cv.design == 'design3':
+            template_name = 'cv_design3.html'
+        else:
+            template_name = 'cv_design4.html'
+
+        # Génération du message avec le template choisi
+        message = render_to_string(template_name, context={
             'cv': cv,  
             'loisirs': loisirs,  
             'experiences': experiences,
             'langues': langues,
             'competences': competences,
             'formations': formations,
-            'photo_url': photo_url   
+            'photo_url': photo_url,
+            'is_email': True # Indique que c'est un e-mail   
         })
 
+        # Création de l'email
         email = EmailMessage(
             subject=subject,
             body=message,
-            from_email='animanalfred@gmail.com',
+            from_email='daheric441@gmail.com',  # Remplacez par l'email de l'expéditeur
             to=[recipient_email],
         )
         email.content_subtype = 'html'  # Spécifie que le contenu est en HTML
 
         try:
-            email.send()  # Envoi de l'email
+            # Envoi de l'email
+            email.send()  
             messages.success(request, "Le CV a été envoyé avec succès.")
         except Exception as e:
+            # Gestion des erreurs d'envoi
             messages.error(request, f"Une erreur s'est produite lors de l'envoi de l'email : {e}")
 
+        # Redirection après l'envoi
         return redirect('view_cvs')
 
+    # Si la méthode n'est pas POST, on affiche simplement le formulaire
     return render(request, 'email_cv.html', {'cv': cv})

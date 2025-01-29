@@ -60,6 +60,9 @@ height: 60px; /* Même hauteur que la barre de navigation */
             padding: 20px;
             max-width: 1200px;
             margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
         }
 
         /* Chaque carte de CV */
@@ -69,6 +72,7 @@ height: 60px; /* Même hauteur que la barre de navigation */
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             transition: transform 0.2s, box-shadow 0.2s;
             padding: 20px;
+            width: 300px;
         }
 
         /* Effet au survol */
@@ -118,6 +122,26 @@ height: 60px; /* Même hauteur que la barre de navigation */
             color: #7f8c8d;
             margin-top: 50px;
         }
+        /* Style du bouton */
+        .add-button {
+            display: block;
+            margin: 40px auto;
+            padding: 12px 25px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .add-button:hover {
+            background-color: #2980b9;
+        }
+        a{
+            text-decoration: none;
+        }
     </style>
 </head>
 <body>
@@ -152,6 +176,11 @@ height: 60px; /* Même hauteur que la barre de navigation */
 
 
     <h1>Mes CVs</h1>
+
+    <a href="{% url 'create_cv' %}">
+        <button class="add-button" type="button">Ajouter un cv</button>
+    </a>
+
     <!-- Afficher tous les CVs de l'utilisateur -->
     {% if cvs %}
         <div class="cv-container">

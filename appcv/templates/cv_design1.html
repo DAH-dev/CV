@@ -1,25 +1,26 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CV - Design 1</title>
+    <title>CV de {{ cv.personne.prenom }} {{ cv.personne.nom }} design 1</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
             margin: 0;
             padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
         }
 
-
-                /* Style de la barre de navigation */
-   nav {
+        /* Style de la barre de navigation */
+        nav {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            background-color: #4CAF50; /* Couleur verte pour la barre entière */
+            background-color: #28a745; /* Vert */
             overflow: hidden;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
             z-index: 1000;
@@ -35,108 +36,43 @@
         }
 
         nav a:hover {
-            background-color: #45a049; /* Une nuance plus foncée de vert au survol */
+            background-color: #34c759; /* Vert clair */
             color: white;
         }
-/*pour ne pas que la bar de navigation couvre les ecritures*/
+
+        /* Pour éviter que la barre de navigation couvre le contenu */
         .offset {
-    height: 60px; /* Même hauteur que la barre de navigation */
-}
-
-
-
-        .cv-container {
-            max-width: 80%;
-            margin: 30px auto;
-            background: #fff;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-            display: grid;
-            grid-template-columns: 300px 1fr;
+            height: 60px;
         }
 
-        .cv-sidebar {
-            background-color: #27ae60;
-            color: #fff;
-            padding: 20px;
+        /* Styles spécifiques pour l'impression */
+        @media print {
+
+            .action-buttons,
+            nav {
+                display: none;
+            }
+
+            body {
+                font-size: 12pt;
+                margin: 0;
+                padding: 0;
+            }
+
+            .container {
+                max-width: 100%;
+                margin: 0;
+                padding: 0;
+            }
         }
 
-        .cv-sidebar img {
-            display: block;
-            margin: 0 auto 20px;
-            width: 140px;
-            height: 140px;
-            border-radius: 20%;
-            object-fit: cover;
-            border: 4px solid #fff;
-        }
-
-        .cv-sidebar h2 {
-            text-align: center;
-            font-size: 22px;
-            margin-bottom: 10px;
-        }
-
-        .cv-sidebar p {
-            text-align: center;
-            font-size: 14px;
-            margin-bottom: 20px;
-        }
-
-        .cv-sidebar .section-title {
-            font-size: 18px;
-            margin-bottom: 10px;
-            border-bottom: 1px solid #fff;
-            padding-bottom: 5px;
-        }
-
-        .cv-sidebar ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .cv-sidebar ul li {
-            font-size: 14px;
-            margin: 8px 0;
-        }
-
-        .cv-content {
-            padding: 20px;
-        }
-
-        .cv-content h1 {
-            font-size: 28px;
-            color: #333;
-            margin: 0 0 10px;
-        }
-
-        .cv-content h2 {
-            font-size: 20px;
-            color: #27ae60;
-            margin: 20px 0 10px;
-            border-bottom: 2px solid #27ae60;
-            display: inline-block;
-        }
-
-        .cv-content ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .cv-content ul li {
-            margin-bottom: 10px;
-            font-size: 16px;
-        }
-
-
-
+        /* Boutons d'action */
         .action-buttons {
             text-align: right;
             margin-bottom: 20px;
+            margin-top: 100px;
         }
+
         .action-buttons button {
             margin-left: 10px;
             padding: 10px 15px;
@@ -145,194 +81,247 @@
             border-radius: 5px;
             cursor: pointer;
         }
-        .action-buttons .btn-print {
-            background-color: #28a745;
+
+        .btn-print {
+            background-color: #28a745; /* Vert */
             color: white;
         }
-        .action-buttons .btn-edit {
+
+        .btn-edit {
             background-color: #007bff;
             color: white;
         }
-        .action-buttons .btn-delete {
+
+        .btn-delete {
             background-color: #dc3545;
             color: white;
         }
-        .action-buttons button:hover {
+
+        button:hover {
             opacity: 0.9;
         }
 
+        /* Conteneur principal */
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
 
-/*pour l'impression sans les button*/
+        .header {
+            display: flex;
+            align-items: center;
+            border-bottom: 2px solid #28a745; /* Vert */
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+        }
 
+        .header img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 10%;
+            margin-right: 20px;
+            border: 3px solid #28a745; /* Vert */
+        }
 
-@media print {
-    /* Masquer les boutons lors de l'impression */
-    .action-buttons {
-        display: none;
-    }
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+            color: #28a745; /* Vert */
+        }
 
-    /* Masquer la barre de navigation si elle est présente */
-    nav {
-        display: none;
-    }
-    
-    /* Optionnel : ajuster la taille de la police et d'autres éléments pour l'impression */
-    body {
-        font-size: 12pt;
-        margin: 0;
-        padding: 0;
-    }
-    
-    .cv-container {
-        max-width: 100%;
-        margin: 0;
-        padding: 0;
-    }
-    .cv-sidebar {
-        background-color: #27ae60 !important;
-        background-image: url('votre-image.jpg') !important;
-        background-size: cover !important;
-        background-repeat: no-repeat !important;
-    }
-    
-}
+        .header h2 {
+            margin: 0;
+            font-size: 18px;
+            color: #555;
+        }
 
+        .section {
+            margin-bottom: 20px;
+        }
 
+        .section h3 {
+            color: #28a745; /* Vert */
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
 
+        .section ul {
+            list-style: none;
+            padding: 0;
+        }
 
+        .section ul li {
+            margin-bottom: 10px;
+        }
+
+        .section ul li strong {
+            font-weight: bold;
+        }
+
+        .footer {
+            text-align: center;
+            font-size: 14px;
+            color: #777;
+            border-top: 1px solid #ddd;
+            padding-top: 10px;
+            margin-top: 20px;
+        }
     </style>
 </head>
+
 <body>
-
     <!-- Barre de navigation -->
- <nav>
-    <a href="{% url 'trombinoscope' %}" class="active">Home</a>
-    <a href="{% url 'view_cvs' %}"> mes CVs</a>
-    <a href="{% url 'view_contact' %}"> Contacts</a>
-    <a href="{% url 'view_experiences' %}">
-         Expériences
-      </a>
-      <a href="{% url 'view_formations' %}">
-        Formations
-    </a>
-    <a href="{% url 'view_langues' %}">
-         Langues
-    </a>
-    <a href="{% url 'view_loisirs' %}">
-         Loisirs
-    </a>
-    <a href="{% url 'view_personne' %}">
-        Profil
-    </a>
-    <a href="{% url 'view_competences' %}">
-          Compétences
-    </a>
-</nav>
-<div class="offset"></div>
+    {% if not is_email %}
+    <nav>
+        <a href="{% url 'trombinoscope' %}" class="active">Home</a>
+        <a href="{% url 'view_cvs' %}">Mes CVs</a>
+        <a href="{% url 'view_contact' %}">Contacts</a>
+        <a href="{% url 'view_experiences' %}">Expériences</a>
+        <a href="{% url 'view_formations' %}">Formations</a>
+        <a href="{% url 'view_langues' %}">Langues</a>
+        <a href="{% url 'view_loisirs' %}">Loisirs</a>
+        <a href="{% url 'view_personne' %}">Profil</a>
+        <a href="{% url 'view_competences' %}">Compétences</a>
+    </nav>
+    {% endif %}
+    <div class="offse"></div>
 
-      <!-- Boutons d'action -->
-      <div class="action-buttons">
-        <!-- Bouton pour imprimer -->
-        <button class="btn-print" onclick="window.print()">Imprimer</button>
+    <!-- Conteneur principal -->
+    <div class="container">
+        <!-- Boutons d'action -->
+        {% if not is_email %}
+        <div class="action-buttons">
+            <button class="btn-print" onclick="window.print()">Imprimer</button>
+            <form action="{% url 'edit_cv' cv.id %}" method="GET" style="display:inline;">
+                <button class="btn-edit" type="submit">Modifier</button>
+            </form>
+            <form action="{% url 'send_cv_email' cv.id %}" method="GET" style="display:inline;">
+                {% csrf_token %}
+                <button class="btn-email" type="submit" style="background-color: #28a745; color: white;">Envoyer par
+                    e-mail</button>
+            </form>
+            <form action="{% url 'delete_cv' cv.id %}" method="POST" style="display:inline;">
+                {% csrf_token %}
+                <button class="btn-delete" type="submit"
+                    onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce CV ?');">Supprimer</button>
+            </form>
+        </div>
+        {% endif %}
 
-        <!-- Bouton pour modifier -->
-        <form action="{% url 'edit_cv' cv.id %}" method="GET" style="display:inline;">
-            <button class="btn-edit" type="submit">Modifier</button>
-        </form>
-
-        <!-- Bouton pour envoyer par e-mail -->
-     <form action="{% url 'send_cv_email' cv.id %}" method="GET" style="display:inline;">
-     {% csrf_token %}
-     <button class="btn-email" type="submit" style="background-color: #ffc107; color: white;">Envoyer par e-mail</button>
-     </form>
-
-        <!-- Bouton pour supprimer -->
-        <form action="{% url 'delete_cv' cv.id %}" method="POST" style="display:inline;">
-            {% csrf_token %}
-            <button class="btn-delete" type="submit" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce CV ?');">Supprimer</button>
-        </form>
-    </div>
-    <div class="cv-container">
-        <!-- Sidebar -->
-        <div class="cv-sidebar">
+        <!-- En-tête -->
+        <div class="header">
             {% if cv.personne.photo %}
-            <img src="{{ cv.personne.photo.url }}" alt="Photo de {{ cv.personne.prenom }} {{ cv.personne.nom }} ">
-         {% else %}
+            <img src="{{ cv.personne.photo.url }}" alt="Photo de {{ cv.personne.prenom }} {{ cv.personne.nom }}">
+            {% else %}
             <img src="https://via.placeholder.com/100" alt="Photo par défaut">
-         {% endif %}
-            <h2>{{ cv.personne.nom }} {{ cv.personne.prenom }}</h2>
-            <p><strong>Email :</strong> {{ contact.email }}</p>
-            <p><strong>Téléphone :</strong> {{ contact.telephone }}</p>
-            <p><strong>Adresse :</strong> {{ contact.adresse }}</p>
-
-            <div class="section">
-                <div class="section-title">Compétences</div>
-                <ul>
-                    {% for competence in competences %}
-                    <li>
-                        <strong> Competence:</strong> {{ competence.nom }} <br>
-                        <strong>niveau:</strong> {{ competence.niveau }}
-                    </li>
-                    {% endfor %}
-                </ul>
-            </div>
-
-            <div class="section">
-                <div class="section-title">Langues</div>
-                <ul>
-                    {% for langue in langues %}
-                    <li>
-                        <strong>Langue :</strong> {{ langue.langue }} <br>
-                        <strong>Niveau :</strong> {{ langue.niveau }}
-                    </li>
-                    {% endfor %}
-                </ul>
-            </div>
-
-            <div class="section">
-                <div class="section-title">Loisirs</div>
-                <ul>
-                    {% for loisir in loisirs %}
-                    <li>
-                        <strong>loisir: </strong>{{ loisir.nom }} <br>
-                        <strong>description:</strong> {{ loisir.description }}
-                           
-                       </li>
-                    {% endfor %}
-                </ul>
+            {% endif %}
+            <div>
+                <h1>{{ cv.personne.prenom }} {{ cv.personne.nom }}</h1>
+                <h2>{{ cv.personne.titre_poste }}</h2>
+                <p>{{ cv.personne.description|default:"Aucune description fournie." }}</p>
             </div>
         </div>
 
-        <!-- Main content -->
-        <div class="cv-content">
-            <h1>Objectif de carrière</h1>
-            <p>{{ cv.objectif }}</p>
-
-            <h2>Expériences</h2>
+        <!-- Informations de contact -->
+        <div class="section">
+            <h3>Informations de contact</h3>
             <ul>
-                {% for experience in experiences %}
+                <li><strong>Email :</strong> {{ cv.contact.email }}</li>
+                <li><strong>Téléphone :</strong> {{ cv.contact.telephone }}</li>
+                <li><strong>Adresse :</strong> {{ cv.contact.adresse }}</li>
+            </ul>
+        </div>
+
+        <!-- Expériences professionnelles -->
+        <div class="section">
+            <h3>Expériences professionnelles</h3>
+            {% if cv.experiences.exists %}
+            <ul>
+                {% for experience in cv.experiences.all %}
                 <li>
-                   <p><strong>Experience: </strong> {{ experience.titre }}</p> <br>
-                   <p><strong>Date de debut: </strong>{{ experience.date_debut }}</p>  <br>
-                   <p></p> <strong>Date de fin: </strong>{% if experience.date_fin %}{{ experience.date_fin }}{% else %}En cours{% endif %}</p> ><br>
-                    <p><strong>Description: </strong>{{ experience.description }}</p>
+                    <strong>{{ experience.titre }}</strong> chez {{ experience.entreprise }}<br>
+                    <small>{{ experience.date_debut }} - {{ experience.date_fin|default:"Présent" }}</small><br>
+                    <p>{{ experience.description }}</p>
                 </li>
                 {% endfor %}
             </ul>
+            {% else %}
+            <p>Aucune expérience professionnelle renseignée.</p>
+            {% endif %}
+        </div>
 
-            <h2>Formations</h2>
+        <!-- Formations -->
+        <div class="section">
+            <h3>Formations</h3>
+            {% if cv.formations.exists %}
             <ul>
-                {% for formation in formations %}
+                {% for formation in cv.formations.all %}
                 <li>
-                <p> <strong>Diplome: </strong>{{ formation.diplome }}</p><br>
-                <p> <strong>Institution: </strong>{{ formation.institution }}</p><br>
-                <p><strong>Date de debut: </strong>{{ formation.date_debut }} </p><br> 
-                <p><strong>Date de fin: </strong>  {{ formation.date_fin }}</p><br>
-                <p><strong>Description: </strong>{{ formation.description }}</p>
+                    <strong>{{ formation.diplome }}</strong> à {{ formation.etablissement }}<br>
+                    <small>{{ formation.date_debut }} - {{ formation.date_fin }}</small><br>
+                    <p>{{ formation.description }}</p>
                 </li>
                 {% endfor %}
             </ul>
+            {% else %}
+            <p>Aucune formation renseignée.</p>
+            {% endif %}
+        </div>
+
+        <!-- Compétences -->
+        <div class="section">
+            <h3>Compétences</h3>
+            {% if cv.competences.exists %}
+            <ul>
+                {% for competence in cv.competences.all %}
+                <li>{{ competence.nom }} ({{ competence.niveau }})</li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <p>Aucune compétence renseignée.</p>
+            {% endif %}
+        </div>
+
+        <!-- Langues -->
+        <div class="section">
+            <h3>Langues</h3>
+            {% if cv.langues.exists %}
+            <ul>
+                {% for langue in cv.langues.all %}
+                <li>{{ langue.nom }} ({{ langue.niveau }})</li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <p>Aucune langue renseignée.</p>
+            {% endif %}
+        </div>
+
+        <!-- Loisirs -->
+        <div class="section">
+            <h3>Loisirs</h3>
+            {% if cv.loisirs.exists %}
+            <ul>
+                {% for loisir in cv.loisirs.all %}
+                <li>{{ loisir.nom }}</li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <p>Aucun loisir renseigné.</p>
+            {% endif %}
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>© {{ current_year }} - Généré par votre application.</p>
         </div>
     </div>
 </body>
+
 </html>

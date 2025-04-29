@@ -3,7 +3,7 @@ from . import views
 
 urlpatterns = [
     #la page d'accueil 
-    path('', views.trombinoscope, name='trombinoscope'),
+    path('', views.home, name='trombinoscope'),
     #route pour s'inscrir
     path('register/', views.register, name='register'),
    # route pour la connexion

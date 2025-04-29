@@ -407,7 +407,7 @@ def create_or_edit_cv(request):
         "loisirs": loisirs,
     })
 
-def trombinoscope(request):
+def home(request):
     personnes = Personne.objects.select_related('user')  # Optimisation
     data = []
     for personne in personnes:

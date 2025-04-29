@@ -420,7 +420,7 @@ def trombinoscope(request):
             'premier_cv': premier_cv,
             'contact': contact,  # Ajoute le contact au dictionnaire
         })
-    return render(request, 'trombinoscope.html', {'data': data})
+    return render(request, 'index.html', {'data': data})
 
 
 def cv_detail(request, pk):

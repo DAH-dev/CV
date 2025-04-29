@@ -35,6 +35,7 @@ class LangueForm(forms.ModelForm):
     class Meta:
         model = Langue
         fields = ['langue', 'niveau']
+        
 
 class ContactForm(forms.ModelForm):
     class Meta:

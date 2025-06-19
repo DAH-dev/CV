@@ -101,6 +101,11 @@
             color: #007BFF;
         }
     </style>
+
+    <link rel="manifest" href="{% static 'appcv/manifest.json' %}">
+<meta name="theme-color" content="#2c3e50">
+
+
 </head>
 <body>
     <!-- Barre de navigation -->
@@ -142,5 +147,15 @@
         </div>
         {% endfor %}
     </div>
+
+    <script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register("{% static 'js/sw.js' %}")
+      .then(function () {
+        console.log("Service Worker enregistré !");
+      });
+  }
+</script>
+
 </body>
 </html>

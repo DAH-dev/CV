@@ -1,201 +1,135 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vérification du Mot de Passe</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vérification du mot de passe</title>
     <style>
-        /* Style de base */
         body {
-            background-color: #f7fafc;
-            min-height: 100vh;
+            padding: 0;
+            background-color: #f0f2f5;
+            font-family: 'Segoe UI', sans-serif;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-family: 'Arial', sans-serif;
+            min-height: 100vh;
         }
 
-        /* Container principal */
         .container {
-            background-color: white;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            border-radius: 20px;
-            padding: 40px;
-            max-width: 600px;
+            background-color: #ffffff;
+            padding: 40px 30px;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+            max-width: 400px;
             width: 100%;
-            transition: all 0.3s;
         }
 
-        .container:hover {
-            transform: scale(1.05);
-        }
-
-        /* Titre principal */
-        h1 {
-            font-size: 2.25rem;
-            font-weight: bold;
-            margin-bottom: 1.5rem;
+        h2 {
             text-align: center;
-            color: #2b6cb0;
+            color: #2e7d32;
+            margin-bottom: 30px;
+            font-size: 1.8rem;
         }
 
-        /* Formulaire */
         form {
             display: flex;
             flex-direction: column;
-            gap: 1.5rem;
+            gap: 15px;
         }
 
-        /* Champs du formulaire */
-        input[type="text"], input[type="password"] {
-            width: 100%;
-            padding: 15px;
-            border-radius: 9999px;
-            border: 1px solid #63b3ed;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            background-color: #ebf8ff;
-            color: #2b6cb0;
-            font-size: 1rem;
-        }
-
-        input[type="text"]:focus, input[type="password"]:focus {
-            outline: none;
-            border-color: #3182ce;
-            box-shadow: 0 0 0 4px rgba(50, 113, 192, 0.3);
-        }
-
-        /* Etiquettes des champs */
         label {
             font-weight: 600;
-            color: #2b6cb0;
-            margin-bottom: 0.5rem;
+            color: #333;
+            margin-bottom: 5px;
+            font-size: 0.95rem;
         }
 
-        /* Message d'erreur */
+        input[type="text"],
+        input[type="password"] {
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+            background-color: #fff;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #4caf50;
+            box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+        }
+
         .error-message {
-            color: #f56565;
-            font-size: 0.875rem;
-            margin-top: 0.5rem;
+            color: #d32f2f;
+            font-size: 0.85rem;
         }
 
-        /* Bouton de soumission */
         button[type="submit"] {
-            padding: 15px 25px;
-            border-radius: 9999px;
-            font-weight: 600;
-            text-align: center;
-            background-color: #3182ce;
-            color: white;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s;
+            margin-top: 10px;
+            padding: 12px;
+            background-color: #4caf50;
             border: none;
+            border-radius: 5px;
+            color: white;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
         }
 
         button[type="submit"]:hover {
-            background-color: #2b6cb0;
+            background-color: #388e3c;
         }
 
-        /* Message pour l'utilisateur authentifié */
-        .user-welcome {
-            text-align: center;
-            color: #2b6cb0;
-            font-weight: 600;
-            font-size: 1.25rem;
-            margin-top: 1.5rem;
-        }
+        @media (max-width: 480px) {
+            body {
+                margin: 15px;
+            }
 
-        /* Lien d'ajout ou modification des informations */
-        .user-action-link {
-            display: block;
-            text-align: center;
-            background-color: #ebf8ff;
-            color: #3182ce;
-            font-weight: 600;
-            padding: 15px 25px;
-            border-radius: 9999px;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
-            margin-top: 1rem;
-            transition: background-color 0.3s;
-        }
+            .container {
+                padding: 30px 20px;
+            }
 
-        .user-action-link:hover {
-            background-color: #bee3f8;
-        }
-
-        /* Lien pour la création de compte */
-        .create-account-link {
-            display: block;
-            text-align: center;
-            background-color: #ebf8ff;
-            color: #3182ce;
-            font-weight: 600;
-            padding: 15px 25px;
-            border-radius: 9999px;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
-            margin-top: 1rem;
-            transition: background-color 0.3s;
-        }
-
-        .create-account-link:hover {
-            background-color: #bee3f8;
-        }
-
-        /* Message pour l'absence d'utilisateur */
-        .user-not-found {
-            text-align: center;
-            color: #f56565;
-            margin-top: 1.5rem;
+            h2 {
+                font-size: 1.5rem;
+            }
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <h1>Vérification du Mot de Passe</h1>
+        <h2>Vérification du mot de passe</h2>
 
         <form method="POST">
             {% csrf_token %}
-            
-            <!-- Champ pour le nom d'utilisateur -->
+
             <div>
                 <label for="username">Nom d'utilisateur :</label>
-                <input type="text" name="username" id="username" required>
+                <input type="text" name="username" id="username" required />
+                {% if form.username.errors %}
+                    <div class="error-message">
+                        {% for error in form.username.errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
             </div>
 
-            <!-- Champ pour le mot de passe -->
             <div>
                 <label for="password">Mot de passe :</label>
-                <input type="password" name="password" id="password" required>
+                <input type="password" name="password" id="password" required />
+                {% if form.password.errors %}
+                    <div class="error-message">
+                        {% for error in form.password.errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
             </div>
 
-            <!-- Bouton de soumission -->
-            <div class="flex justify-between items-center">
-                <button type="submit">
-                    Valider
-                </button>
-            </div>
-
-            <!-- Message d'erreur -->
-            {% if error_message %}
-                <p class="error-message">{{ error_message }}</p>
-            {% endif %}
+            <button type="submit">Valider</button>
         </form>
-
-        <!-- Affichage si l'utilisateur est authentifié -->
-        {% if user_authenticated %}
-            <h2 class="user-welcome">Bienvenue, {{ user.username }} {{ personne.prenom }}</h2>
-            <a href="{% url 'boite' %}" class="user-action-link">
-                Ajouter ou modifier mes informations
-            </a>
-        {% endif %}
-
-        <!-- Message pour inviter l'utilisateur à créer un compte s'il n'en a pas -->
-        {% if user_not_found %}
-            <p class="user-not-found">Veuillez créer un compte si vous ne l'avez pas encore fait.</p>
-            <a href="{% url 'register' %}" class="create-account-link">
-                Créer un compte
-            </a>
-        {% endif %}
     </div>
 
 </body>

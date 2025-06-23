@@ -26,7 +26,8 @@ SECRET_KEY = 'django-insecure-3()c^s%hp35^nv^f@%4h186m1f5oxh=z%9_u5!8rpipd&miv-x
 DEBUG = True
 
 
-ALLOWED_HOSTS = ['daheric.pythonanywhere.com']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'daheric.pythonanywhere.com']
+
 
 # Login redirect URL
 LOGIN_REDIRECT_URL = '/'  # Redirige l'utilisateur vers la page d'accueil après connexion

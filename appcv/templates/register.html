@@ -1,98 +1,99 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Créer un compte</title>
     <style>
-        /* Style de base */
         body {
-            background-color: #f7fafc;
-            min-height: 100vh;
+           
+            padding: 0;
+            background-color: #f0f2f5;
+            font-family: 'Segoe UI', sans-serif;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-family: 'Arial', sans-serif;
+            min-height: 100vh;
         }
 
-        /* Container principal */
         .container {
-            background-color: white;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            border-radius: 20px;
-            padding: 40px;
-            max-width: 600px;
+            background-color: #ffffff;
+            padding: 40px 30px;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+            max-width: 400px;
             width: 100%;
-            transition: all 0.3s;
         }
 
-        .container:hover {
-            transform: scale(1.05);
-        }
-
-        /* Titre principal */
         h2 {
-            font-size: 2.25rem;
-            font-weight: bold;
-            margin-bottom: 1.5rem;
             text-align: center;
-            color: #2b6cb0;
+            color: #2e7d32;
+            margin-bottom: 30px;
+            font-size: 1.8rem;
         }
 
-        /* Formulaire */
         form {
             display: flex;
             flex-direction: column;
-            gap: 1.5rem;
+            gap: 15px;
         }
 
-        /* Champs du formulaire */
-        input[type="text"], input[type="email"], input[type="password"] {
-            width: 100%;
-            padding: 15px;
-            border-radius: 9999px;
-            border: 1px solid #63b3ed;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            background-color: #ebf8ff;
-            color: #2b6cb0;
-            font-size: 1rem;
-        }
-
-        input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focus {
-            outline: none;
-            border-color: #3182ce;
-            box-shadow: 0 0 0 4px rgba(50, 113, 192, 0.3);
-        }
-
-        /* Etiquettes des champs */
         label {
             font-weight: 600;
-            color: #2b6cb0;
-            margin-bottom: 0.5rem;
+            color: #333;
+            margin-bottom: 5px;
+            font-size: 0.95rem;
         }
 
-        /* Messages d'erreur */
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+            background-color: #fff;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #4caf50;
+            box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+        }
+
         .error-message {
-            color: #f56565;
-            font-size: 0.875rem;
-            margin-top: 0.5rem;
+            color: #d32f2f;
+            font-size: 0.85rem;
         }
 
-        /* Bouton de soumission */
         button[type="submit"] {
-            padding: 15px 25px;
-            border-radius: 9999px;
-            font-weight: 600;
-            text-align: center;
-            background-color: #3182ce;
-            color: white;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s;
+            margin-top: 10px;
+            padding: 12px;
+            background-color: #4caf50;
             border: none;
+            border-radius: 5px;
+            color: white;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
         }
 
         button[type="submit"]:hover {
-            background-color: #2b6cb0;
+            background-color: #388e3c;
+        }
+
+        @media (max-width: 480px) {
+             body {
+            margin: 15px;
+        }
+            .container {
+                padding: 30px 20px;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
         }
     </style>
 </head>
@@ -103,13 +104,10 @@
 
         <form method="POST">
             {% csrf_token %}
-            
-            <!-- Champ pour le nom d'utilisateur -->
-            <div class="space-y-4">
+
+            <div>
                 <label for="username">Nom d'utilisateur :</label>
-                <input type="text" name="username" id="username" 
-                    value="{{ form.username.value }}" 
-                    required>
+                <input type="text" name="username" id="username" value="{{ form.username.value }}" required />
                 {% if form.username.errors %}
                     <div class="error-message">
                         {% for error in form.username.errors %}
@@ -119,12 +117,9 @@
                 {% endif %}
             </div>
 
-            <!-- Champ pour l'adresse e-mail -->
-            <div class="space-y-4">
+            <div>
                 <label for="email">Adresse e-mail :</label>
-                <input type="email" name="email" id="email" 
-                    value="{{ form.email.value }}" 
-                    required>
+                <input type="email" name="email" id="email" value="{{ form.email.value }}" required />
                 {% if form.email.errors %}
                     <div class="error-message">
                         {% for error in form.email.errors %}
@@ -134,11 +129,9 @@
                 {% endif %}
             </div>
 
-            <!-- Champ pour le mot de passe -->
-            <div class="space-y-4">
+            <div>
                 <label for="password1">Mot de passe :</label>
-                <input type="password" name="password1" id="password1" 
-                    required>
+                <input type="password" name="password1" id="password1" required />
                 {% if form.password1.errors %}
                     <div class="error-message">
                         {% for error in form.password1.errors %}
@@ -148,11 +141,9 @@
                 {% endif %}
             </div>
 
-            <!-- Champ pour la confirmation du mot de passe -->
-            <div class="space-y-4">
+            <div>
                 <label for="password2">Confirmer le mot de passe :</label>
-                <input type="password" name="password2" id="password2" 
-                    required>
+                <input type="password" name="password2" id="password2" required />
                 {% if form.password2.errors %}
                     <div class="error-message">
                         {% for error in form.password2.errors %}
@@ -162,10 +153,7 @@
                 {% endif %}
             </div>
 
-            <!-- Bouton de soumission -->
-            <div class="flex justify-center mt-6">
-                <button type="submit">S'inscrire</button>
-            </div>
+            <button type="submit">S'inscrire</button>
         </form>
     </div>
 

@@ -1,112 +1,108 @@
-/* styles.css */
-
 /* Reset de base */
 body, h1, p, form, button {
-    margin: 0;
-    padding: 0;
-    font-family: 'Arial', sans-serif;
-    
+  margin: 0;
+  padding: 0;
+  font-family: 'Arial', sans-serif;
 }
 
-
-
-/* Styles globaux */
+/* Corps global */
 body {
-    background-color: #f4f7fc;
-    color: #333;
-    padding: 20px;
-    
+  background-color: #f4f7fc;
+  color: #333;
+  padding: 20px;
 }
 
- /* Style de la barre de navigation */
- nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background-color: #4CAF50; /* Couleur verte pour la barre entière */
-    overflow: hidden;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    z-index: 1000;
+/* Navigation */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #4CAF50;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
 }
 
 nav a {
-    float: left;
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 20px;
-    text-decoration: none;
+  float: left;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 20px;
+  text-decoration: none;
 }
 
 nav a:hover {
-    background-color: #45a049; /* Une nuance plus foncée de vert au survol */
-    color: white;
+  background-color: #45a049;
+  color: white;
 }
-/*pour ne pas que la bar de navigation couvre les ecritures*/
+
+/* Pour éviter que la barre cache le contenu */
 .offset {
-height: 60px; /* Même hauteur que la barre de navigation */
+  height: 60px;
 }
 
-
+/* Titre */
 h1 {
-    text-align: center;
-    font-size: 2.5rem;
-    color: #2c3e50;
-    margin-bottom: 20px;
-    color: #4CAF50;
+  text-align: center;
+  font-size: 2rem;
+  color: #4CAF50;
+  margin: 20px 0;
 }
 
+/* Formulaire responsive */
 form {
-    background-color: #fff;
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    max-width: 90%;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 colonnes de largeur égale */
-    gap: 10px; /* Espacement entre les éléments */
-    align-items: center;
-}
-form div{
-    margin:10px;
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  max-width: 1000px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
 }
 
-/* Container de chaque bouton */
-.button-container {
-    margin-bottom: 20px;
+form div {
+  display: flex;
+  justify-content: center;
 }
 
+/* Boutons */
 button {
-    background-color: #3498db;
-    background-color: #3498dbce;
-    /* background-color: #3498db8a; */
-    color: white;
-    padding: 15px 25px;
-    font-size: 1rem;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    text-align: center;
-    transition: background-color 0.3s ease;
+  background-color: #3498db;
+  color: white;
+  padding: 15px 25px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  width: 100%;
+  max-width: 100%;
+  transition: background-color 0.3s ease;
 }
 
 button:hover {
-    background-color: #2980b9;
-    background-color: #3498db;
-    background-color: #4CAF50;
+  background-color: #4CAF50;
 }
 
-/* Ajout d'un peu d'espacement et d'un effet de survol */
 button:focus {
-    outline: none;
-    box-shadow: 0 0 5px rgba(52, 152, 219, 0.8);
+  outline: none;
+  box-shadow: 0 0 5px rgba(52, 152, 219, 0.8);
 }
 
-/* Espacement entre les boutons */
-.button-container br {
+/* Responsive navbar (pour téléphone) */
+@media (max-width: 600px) {
+  nav a {
+    float: none;
     display: block;
-    margin-bottom: 10px;
-}
+    text-align: left;
+    padding: 10px 15px;
+  }
 
+  h1 {
+    font-size: 1.5rem;
+  }
+}

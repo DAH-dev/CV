@@ -1,133 +1,161 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Ajouter une langue</title>
     {% load static %}
     <style>
-        /* Conteneur principal */
-        .container {
-            min-height: 100vh;
+        body {
+            padding: 0;
+            background-color: #f0f2f5;
+            font-family: 'Segoe UI', sans-serif;
             display: flex;
             align-items: center;
             justify-content: center;
-            background-color: #f9fafb;
+            min-height: 100vh;
         }
 
-        /* Carte du formulaire */
-        .form-container {
+        .container {
             background-color: #ffffff;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-            border-radius: 20px;
-            padding: 2rem;
-            max-width: 500px;
+            padding: 40px 30px;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+            max-width: 400px;
             width: 100%;
             transition: transform 0.3s ease;
         }
-
-        .form-container:hover {
+        .container:hover {
             transform: scale(1.05);
         }
 
-        /* Titre */
-        .form-title {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: #1d4ed8;
+        h2 {
             text-align: center;
-            margin-bottom: 1.5rem;
+            color: #2e7d32; /* vert */
+            margin-bottom: 30px;
+            font-size: 1.8rem;
         }
 
-        /* Groupes de formulaire */
-        .form-group {
-            margin-bottom: 1.5rem;
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
         }
 
-        .form-label {
-            display: block;
+        label {
             font-weight: 600;
-            color: #1d4ed8;
-            margin-bottom: 0.5rem;
+            color: #333;
+            margin-bottom: 5px;
+            font-size: 0.95rem;
         }
 
-        .form-input,
-        .form-select {
-            display: block;
-            width: 100%;
-            border: 1px solid #93c5fd;
-            border-radius: 9999px;
-            padding: 0.75rem 1rem;
-            background-color: #eff6ff;
-            color: #1e3a8a;
+        input[type="text"],
+        select {
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
             font-size: 1rem;
+            background-color: #fff;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+        }
+
+        input:focus,
+        select:focus {
             outline: none;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            border-color: #4caf50;
+            box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
         }
 
-        .form-input:focus,
-        .form-select:focus {
-            border-color: #3b82f6;
-            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.3);
+        /* Pour le select, on ajoute un peu de padding à droite pour la flèche */
+        select {
+            padding-right: 36px;
+            background-image: url("data:image/svg+xml;charset=US-ASCII,%3csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='%23666666'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            background-size: 16px 16px;
         }
 
-        /* Boutons */
-        .form-actions {
+        .buttons {
             display: flex;
             justify-content: space-between;
-            margin-top: 2rem;
+            margin-top: 10px;
+            gap: 10px;
         }
 
-        .btn-primary,
-        .btn-secondary {
-            padding: 0.75rem 1.5rem;
-            font-size: 1rem;
-            font-weight: 600;
-            border-radius: 9999px;
-            text-align: center;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-        }
-
-        .btn-primary {
-            background-color: #2563eb;
-            color: #ffffff;
+        button[type="submit"] {
+            flex: 1;
+            padding: 12px;
+            background-color: #4caf50; /* vert */
             border: none;
+            border-radius: 5px;
+            color: white;
+            font-weight: 600;
+            font-size: 1rem;
             cursor: pointer;
+            transition: background-color 0.3s ease;
         }
 
-        .btn-primary:hover {
-            background-color: #1e40af;
-            transform: translateY(-2px);
+        button[type="submit"]:hover {
+            background-color: #388e3c;
         }
 
-        .btn-secondary {
-            background-color: #dbeafe;
-            color: #1d4ed8;
+        a.button-secondary {
+            flex: 1;
+            display: inline-block;
+            padding: 12px;
+            background-color: #2196f3; /* bleu */
+            color: white;
+            border-radius: 5px;
+            text-align: center;
+            font-weight: 600;
             text-decoration: none;
+            transition: background-color 0.3s ease;
+            line-height: 1.2;
         }
 
-        .btn-secondary:hover {
-            background-color: #bfdbfe;
-            transform: translateY(-2px);
+        a.button-secondary:hover {
+            background-color: #0b7dda;
+        }
+
+        @media (max-width: 480px) {
+            body {
+                margin: 15px;
+            }
+            .container {
+                padding: 30px 20px;
+            }
+            h2 {
+                font-size: 1.5rem;
+            }
+            .buttons {
+                flex-direction: column;
+            }
+            button[type="submit"],
+            a.button-secondary {
+                width: 100%;
+                flex: unset;
+            }
         }
     </style>
 </head>
-<body class="container">
+<body>
 
-    <div class="form-container">
-        <h1 class="form-title">Ajouter une langue</h1>
+    <div class="container">
+        <h2>Ajouter une langue</h2>
 
-        <form method="POST" class="form">
+        <form method="POST">
             {% csrf_token %}
             
-            <div class="form-group">
-                <label for="langue" class="form-label">Langue :</label>
-                <input type="text" name="langue" id="langue" class="form-input" required>
+            <div>
+                <label for="langue">Langue :</label>
+                <input type="text" name="langue" id="langue" required>
             </div>
-            <div class="form-group">
-                <label for="niveau" class="form-label">Niveau :</label>
-                <select name="niveau" id="niveau" class="form-select" required>
+
+            <div>
+                <label for="niveau">Niveau :</label>
+                <select name="niveau" id="niveau" required>
                     <option value="Débutant">Débutant</option>
                     <option value="Intermédiaire">Intermédiaire</option>
                     <option value="Avancé">Avancé</option>
@@ -136,9 +164,9 @@
                 </select>
             </div>
 
-            <div class="form-actions">
-                <button type="submit" class="btn-primary">Ajouter</button>
-                <a href="{% url 'view_langues' %}" class="btn-secondary">Voir mes langues</a>
+            <div class="buttons">
+                <button type="submit">Ajouter</button>
+                <a href="{% url 'view_langues' %}" class="button-secondary">Voir mes langues</a>
             </div>
         </form>
     </div>

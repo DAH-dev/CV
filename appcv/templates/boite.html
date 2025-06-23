@@ -2,106 +2,80 @@
 <html lang="fr">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Créer un CV</title>
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'boite.css' %}">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Créer un CV</title>
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'boite.css' %}" />
+  <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    rel="stylesheet"
+  />
 </head>
 
 <body>
-
-
-    <!-- Barre de navigation -->
-<nav>
+  <!-- Barre de navigation -->
+  <nav>
     <a href="{% url 'trombinoscope' %}" class="active">Home</a>
-    <a href="{% url 'view_cvs' %}"> mes CVs</a>
-    <a href="{% url 'view_contact' %}"> Contacts</a>
-    <a href="{% url 'view_experiences' %}">
-         Expériences
-      </a>
-      <a href="{% url 'view_formations' %}">
-        Formations
-    </a>
-    <a href="{% url 'view_langues' %}">
-         Langues
-    </a>
-    <a href="{% url 'view_loisirs' %}">
-         Loisirs
-    </a>
-    <a href="{% url 'view_personne' %}">
-        Profil
-    </a>
-    <a href="{% url 'view_competences' %}">
-          Compétences
-    </a>
-</nav>
-<div class="offset"></div>
-    <h1>Créer un CV</h1>
+    <a href="{% url 'view_cvs' %}">Mes CVs</a>
+    <a href="{% url 'view_contact' %}">Contacts</a>
+    <a href="{% url 'view_experiences' %}">Expériences</a>
+    <a href="{% url 'view_formations' %}">Formations</a>
+    <a href="{% url 'view_langues' %}">Langues</a>
+    <a href="{% url 'view_loisirs' %}">Loisirs</a>
+    <a href="{% url 'view_personne' %}">Profil</a>
+    <a href="{% url 'view_competences' %}">Compétences</a>
+  </nav>
 
-    <!-- Formulaire de vérification du mot de passe -->
-    <form method="POST">
-        {% csrf_token %}
-        <div>
-            <button type="button" onclick="window.location.href='{% url 'create_personne' %}'">
-                <i class="fas fa-user-edit"></i> Créer ou modifier mon profil
-            </button>
-        </div>
-        <br><br>
-    
-        <div>
-            <button type="button" onclick="window.location.href='{% url 'create_contact' %}'">
-                <i class="fas fa-address-book"></i> Créer ou modifier mes contacts
-            </button>
-        </div>
-        <br><br>
-    
-        <div>
-            <button type="button" onclick="window.location.href='{% url 'create_formation' %}'">
-                <i class="fas fa-graduation-cap"></i> Ajouter une formation
-            </button>
-        </div>
-        <br><br>
-    
-        <div>
-            <button type="button" onclick="window.location.href='{% url 'create_competence' %}'">
-                <i class="fas fa-cogs"></i> Ajouter une compétence
-            </button>
-        </div>
-        <br><br>
-    
-        <div>
-            <button type="button" onclick="window.location.href='{% url 'create_experience' %}'">
-                <i class="fas fa-briefcase"></i> Ajouter une expérience
-            </button>
-        </div>
-        <br><br>
-    
-        <div>
-            <button type="button" onclick="window.location.href='{% url 'create_loisir' %}'">
-                <i class="fas fa-heart"></i> Ajouter un loisir
-            </button>
-        </div>
-        <br><br>
-    
-        <div>
-            <button type="button" onclick="window.location.href='{% url 'create_langue' %}'">
-                <i class="fas fa-language"></i> Ajouter une langue
-            </button>
-        </div>
-        <br><br>
-    
-        <div>
-            <button type="button" onclick="window.location.href='{% url 'create_cv' %}'">
-                <i class="fas fa-file-alt"></i> Ajouter un CV
-            </button>
-        </div>
-    </form>
-    
-        {% block content %}
-        {% endblock %}
+  <div class="offset"></div>
+
+  <h1>Créer un CV</h1>
+
+  <form method="POST">
+    {% csrf_token %}
+    <div>
+      <button type="button" onclick="window.location.href='{% url 'create_personne' %}'">
+        <i class="fas fa-user-edit"></i> Créer ou modifier mon profil
+      </button>
+    </div>
+    <div>
+      <button type="button" onclick="window.location.href='{% url 'create_contact' %}'">
+        <i class="fas fa-address-book"></i> Créer ou modifier mes contacts
+      </button>
+    </div>
+    <div>
+      <button type="button" onclick="window.location.href='{% url 'create_formation' %}'">
+        <i class="fas fa-graduation-cap"></i> Ajouter une formation
+      </button>
+    </div>
+    <div>
+      <button type="button" onclick="window.location.href='{% url 'create_competence' %}'">
+        <i class="fas fa-cogs"></i> Ajouter une compétence
+      </button>
+    </div>
+    <div>
+      <button type="button" onclick="window.location.href='{% url 'create_experience' %}'">
+        <i class="fas fa-briefcase"></i> Ajouter une expérience
+      </button>
+    </div>
+    <div>
+      <button type="button" onclick="window.location.href='{% url 'create_loisir' %}'">
+        <i class="fas fa-heart"></i> Ajouter un loisir
+      </button>
+    </div>
+    <div>
+      <button type="button" onclick="window.location.href='{% url 'create_langue' %}'">
+        <i class="fas fa-language"></i> Ajouter une langue
+      </button>
+    </div>
+    <div>
+      <button type="button" onclick="window.location.href='{% url 'create_cv' %}'">
+        <i class="fas fa-file-alt"></i> Ajouter un CV
+      </button>
+    </div>
+  </form>
+
+  {% block content %}{% endblock %}
 </body>
 
 </html>

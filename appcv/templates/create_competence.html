@@ -1,135 +1,153 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ajouter une compétence</title>
     {% load static %}
     <style>
-        /* Corps de la page */
         body {
-            min-height: 100vh;
+            padding: 0;
+            background-color: #f0f2f5;
+            font-family: 'Segoe UI', sans-serif;
             display: flex;
             align-items: center;
             justify-content: center;
-            background-color: #f3f4f6; /* Couleur arrière-plan */
+            min-height: 100vh;
         }
 
-        /* Conteneur */
         .container {
             background-color: #ffffff;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
-            border-radius: 24px;
-            padding: 2.5rem;
-            max-width: 32rem;
+            padding: 40px 30px;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+            max-width: 400px;
             width: 100%;
-            transition: transform 0.3s ease-in-out;
-        }
-        .container:hover {
-            transform: scale(1.05);
         }
 
-        /* Titre */
-        .title {
-            font-size: 2.5rem;
-            font-weight: 800;
-            margin-bottom: 1.5rem;
+        h2 {
             text-align: center;
-            color: #1d4ed8;
+            color: #2e7d32; /* vert */
+            margin-bottom: 30px;
+            font-size: 1.8rem;
         }
 
-        /* Labels */
-        .label {
-            display: block;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            color: #1d4ed8;
-        }
-
-        /* Champs de formulaire */
-        .input {
-            display: block;
-            width: 100%;
-            border-radius: 9999px;
-            border: 1px solid #60a5fa;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            padding: 0.75rem 1rem;
-            background-color: #eff6ff;
-            color: #1e40af;
-            font-size: 1rem;
-            outline: none;
-            transition: box-shadow 0.3s ease-in-out;
-        }
-        .input:focus {
-            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.5);
-        }
-
-        /* Boutons */
-        .button {
-            font-weight: 600;
-            padding: 0.75rem 1.5rem;
-            border-radius: 9999px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
-        }
-        .button-primary {
-            background-color: #2563eb;
-            color: #ffffff;
-            border: none;
-        }
-        .button-primary:hover {
-            background-color: #1d4ed8;
-            transform: translateY(-2px);
-        }
-        .button-secondary {
-            background-color: #dbeafe;
-            color: #1d4ed8;
-            text-align: center;
-            text-decoration: none;
-        }
-        .button-secondary:hover {
-            background-color: #bfdbfe;
-            transform: translateY(-2px);
-        }
-
-        /* Section des boutons */
-        .button-container {
+        form {
             display: flex;
-            justify-content: space-around;
-            margin-top: 1.5rem;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        label {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+            font-size: 0.95rem;
+        }
+
+        input[type="text"] {
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+            background-color: #fff;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #4caf50;
+            box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+        }
+
+        .error-message {
+            color: #d32f2f;
+            font-size: 0.85rem;
+        }
+
+        button[type="submit"] {
+            margin-top: 10px;
+            padding: 12px;
+            background-color: #4caf50; /* vert */
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #388e3c;
+        }
+
+        /* Bouton secondaire en bleu */
+        a.button-secondary {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 12px;
+            background-color: #2196f3; /* bleu */
+            color: white;
+            border-radius: 5px;
+            text-align: center;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        a.button-secondary:hover {
+            background-color: #0b7dda;
+        }
+
+        @media (max-width: 480px) {
+             body {
+                margin: 15px;
+            }
+            .container {
+                padding: 30px 20px;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <h1 class="title">Ajouter une compétence</h1>
+        <h2>Ajouter une compétence</h2>
 
-        <form method="POST" class="space-y-6">
+        <form method="POST">
             {% csrf_token %}
             <div>
-                <label for="nom" class="label">Nom de la compétence :</label>
-                <input type="text" name="nom" id="nom" 
-                    class="input"
-                    placeholder="Exemple : Programmation" required>
+                <label for="nom">Nom de la compétence :</label>
+                <input type="text" name="nom" id="nom" placeholder="Exemple : Programmation" required>
+                {% if form.nom.errors %}
+                    <div class="error-message">
+                        {% for error in form.nom.errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
             </div>
+
             <div>
-                <label for="niveau" class="label">Niveau :</label>
-                <input type="text" name="niveau" id="niveau"
-                    class="input"
-                    placeholder="Exemple : Avancé" required>
+                <label for="niveau">Niveau :</label>
+                <input type="text" name="niveau" id="niveau" placeholder="Exemple : Avancé" required>
+                {% if form.niveau.errors %}
+                    <div class="error-message">
+                        {% for error in form.niveau.errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
             </div>
-            <div class="button-container">
-                <button type="submit" 
-                    class="button button-primary">
-                    Ajouter
-                </button>
-                <a href="{% url 'view_competences' %}" 
-                    class="button button-secondary">
-                    Voir mes compétences
-                </a>
-            </div>
+
+            <button type="submit">Ajouter</button>
         </form>
+
+        <a href="{% url 'view_competences' %}" class="button-secondary">Voir mes compétences</a>
     </div>
 
 </body>
